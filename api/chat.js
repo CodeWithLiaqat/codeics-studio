@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     const userMessage =
       messages && messages.length > 0 ? messages[messages.length - 1].content : "";
 
-    const systemPrompt = `You are the official AI Assistant for Codeics (a 3D web engineering studio founded by Liaqat Ali Khan).
+    const systemPrompt = `You are the official AI Assistant for Codeics (a digital agency and 3D web engineering studio founded by Liaqat Ali Khan).
 Rules:
 1. Answer only about Codeics services (3D interactive web experiences, React Three Fiber, GSAP animations, UI/UX systems), custom budgets starting from $1,000+, and project timelines.
 2. If asked in Roman Urdu or Urdu, reply warmly and professionally in Roman Urdu. If in English, reply in crisp English.
@@ -32,8 +32,9 @@ Rules:
 
     const fullPrompt = `${systemPrompt}\n\nUser Question: ${userMessage}\nAssistant Response:`;
 
+    // Updated model endpoint path: gemini-1.5-flash-latest
     const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent",
       {
         method: "POST",
         headers: {
@@ -67,6 +68,6 @@ Rules:
     return res.status(200).json({ text: reply });
   } catch (err) {
     console.error("Handler Exception:", err);
-    return res.status(200).json({ text: `Connection error: ${err.message}` });
+    return res.status(500).json({ text: `Connection error: ${err.message}` });
   }
 }
