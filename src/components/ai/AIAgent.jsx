@@ -3,58 +3,18 @@ import { Link } from "react-router-dom";
 import { Bot, X, Send, Sparkles, Mic, ArrowUpRight } from "lucide-react";
 import { siteConfig, leadFormOptions } from "../../data/siteConfig";
 import { faqData } from "../../data/faqData";
-import { servicesData } from "../../data/servicesData";
 import { insertLead } from "../../lib/supabaseClient";
-
-const STOP = new Set(["the","a","an","is","are","do","does","you","your","i","we","my","of","to","in","for","on","with","how","what","much","can","it","and","or","me","us","about","tell"]);
-const tokens = (s) => s.toLowerCase().replace(/[^a-z0-9\s$+]/g, " ").split(/\s+/).filter((t) => t && !STOP.has(t));
-
-const SYNONYMS = {
-  price: ["pricing","cost","costs","budget","rate","rates","quote","expensive","cheap","$"],
-  time: ["timeline","long","duration","weeks","months","fast","quick","deadline"],
-  "3d": ["three","threejs","webgl","fiber","r3f","immersive","interactive"],
-  ai: ["assistant","llm","gpt","chatbot","automation","intelligent"],
-  seo: ["ranking","google","speed","performance","vitals","lighthouse"],
-  start: ["begin","hire","kickoff","contact","work","together","project"],
-};
-const expand = (ts) => {
-  const out = new Set(ts);
-  for (const [root, syns] of Object.entries(SYNONYMS)) if (ts.some((t) => t === root || syns.includes(t))) { out.add(root); syns.forEach((s) => out.add(s)); }
-  return [...out];
-};
-
-const INDEX = [
-  ...faqData.map((f) => ({ kind: "faq", text: f.answer, terms: expand(tokens(f.question + " " + f.category + " " + f.answer.slice(0, 160))) })),
-  ...servicesData.map((s) => ({
-    kind: "service",
-    text: `${s.title}: ${s.shortDescription} ${s.startingPrice}.`,
-    href: `/services/${s.slug}`,
-    terms: expand(tokens(s.title + " " + s.eyebrow + " " + s.techBadges.join(" "))),
-  })),
-];
-
-export function matchQuery(q) {
-  const qt = expand(tokens(q));
-  if (!qt.length) return null;
-  let best = null;
-  for (const item of INDEX) {
-    const hits = qt.filter((t) => item.terms.includes(t)).length;
-    const score = hits / Math.sqrt(item.terms.length) + (hits === qt.length ? 0.5 : 0);
-    if (hits >= 1 && (!best || score > best.score)) best = { ...item, score };
-  }
-  return best && best.score > 0.25 ? best : null;
-}
 
 const LEAD_WORDS = /\b(hire|quote|proposal|start( a)? project|work (with|together)|get started|book|talk to (someone|liaqat|human)|contact)\b/i;
 
 const SUGGESTIONS = [
-  faqData.find((f) => f.id === "pricing")?.question,
-  faqData.find((f) => f.id === "timeline")?.question,
-  faqData.find((f) => f.id === "3d-performance")?.question,
+  "Services aur pricing kya hai?",
+  "How fast can you build a 3D website?",
+  "What tech stack do you use?",
   "Start a project brief",
-].filter(Boolean);
+];
 
-const greeting = `Hi, I'm the ${siteConfig.name} assistant. Ask about services, pricing or timelines, or say "start a project" and I'll take a brief for ${siteConfig.founder.name.split(" ")[0]}.`;
+const greeting = `Salam! Main Codeics ka AI assistant hoon. Aap mujhse services, pricing, 3D web development ke bare mein pooch sakte hain (Roman Urdu ya English mein), ya "start a project" keh kar Liaqat ke liye brief de sakte hain.`;
 
 const LEAD_STEPS = [
   { key: "name", prompt: "Great. What's your name?", validate: (v) => v.trim().length >= 2 || "Please enter your full name." },
@@ -87,7 +47,7 @@ export default function AIAgent() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
-  const [lead, setLead] = useState(null); // { step, values }
+  const [lead, setLead] = useState(null);
   const [messages, setMessages] = useState([{ id: 1, role: "bot", text: greeting }]);
   const listRef = useRef(null);
   const inputRef = useRef(null);
@@ -111,7 +71,7 @@ export default function AIAgent() {
 
   const reply = (text, extra) => {
     setTyping(true);
-    const delay = Math.min(1200, 300 + text.length * 6);
+    const delay = Math.min(1000, 200 + text.length * 4);
     setTimeout(() => { setTyping(false); push("bot", text, extra); }, delay);
   };
 
@@ -138,13 +98,13 @@ export default function AIAgent() {
     const { error } = await insertLead({ ...values, source: "ai_agent" });
     setTyping(false);
     if (error) {
-      push("bot", `I couldn't save that just now. Email ${siteConfig.contact.email} and you'll get a reply within 24 hours.`);
+      push("bot", `I couldn't save that right now. Aap direct email kar sakte hain: ${siteConfig.contact.email}.`);
     } else {
-      push("bot", `Thanks ${values.name.split(" ")[0]}. Your brief is with ${siteConfig.founder.name}. Expect a reply at ${values.email} within 24 hours.`);
+      push("bot", `Shukriya ${values.name.split(" ")[0]}! Aapka brief Liaqat Ali Khan tak pohnch gaya hai. 24 ghante ke andar aapko ${values.email} par update mil jayegi.`);
     }
   };
 
-  const handleSend = (raw) => {
+  const handleSend = async (raw) => {
     const text = (raw ?? input).trim();
     if (!text || typing) return;
     setInput("");
@@ -153,9 +113,38 @@ export default function AIAgent() {
     if (lead) return advanceLead(text);
     if (LEAD_WORDS.test(text)) return startLead();
 
-    const hit = matchQuery(text);
-    if (hit) return reply(hit.text, hit.href ? { href: hit.href, hrefLabel: "View service" } : {});
-    reply(`I don't have a precise answer for that yet. Ask about services, pricing or timelines, or say "start a project" and I'll take a brief. You can also email ${siteConfig.contact.email}.`);
+    // Send query to Gemini API Serverless Route
+    setTyping(true);
+    try {
+      // Build conversation history for context
+      const chatPayload = messages
+        .filter((m) => m.role === "user" || m.role === "bot")
+        .map((m) => ({
+          role: m.role === "bot" ? "assistant" : "user",
+          content: m.text,
+        }));
+
+      chatPayload.push({ role: "user", content: text });
+
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: chatPayload }),
+      });
+
+      const data = await res.json();
+      setTyping(false);
+
+      if (res.ok && data.text) {
+        push("bot", data.text);
+      } else {
+        push("bot", "Maazrat, response generate nahi ho saka. Barah-e-karam dobara poochain ya contact form use karein.");
+      }
+    } catch (err) {
+      console.error("AI Request failed:", err);
+      setTyping(false);
+      push("bot", `Connection issue hai. Aap direct email kar sakte hain: ${siteConfig.contact.email}`);
+    }
   };
 
   const pickOption = (key, opt) => {
@@ -207,7 +196,7 @@ export default function AIAgent() {
               <p className="text-sm font-medium text-zinc-50">{siteConfig.name} Assistant</p>
               <p className="flex items-center gap-2 text-[11px] text-zinc-500">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
-                {typing ? "Thinking" : "Online · replies instantly"}
+                {typing ? "Thinking" : "Online · Roman Urdu & English"}
               </p>
             </div>
           </div>
@@ -223,7 +212,7 @@ export default function AIAgent() {
           {messages.map((m) => (
             <div key={m.id} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
               <div className={`max-w-[85%] px-4 py-2.5 text-sm leading-relaxed motion-safe:animate-fade-up ${m.role === "user" ? "rounded-2xl rounded-br-md bg-gradient-to-br from-accent-soft to-accent text-obsidian shadow-aura" : "glass rounded-2xl rounded-bl-md text-zinc-200"}`}>
-                <p>{m.text}</p>
+                <p className="whitespace-pre-line">{m.text}</p>
                 {m.href && (
                   <Link to={m.href} onClick={() => setOpen(false)} className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-emerald-400 hover:text-emerald-300">
                     {m.hrefLabel} <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
@@ -272,7 +261,7 @@ export default function AIAgent() {
             onChange={(e) => setInput(e.target.value)}
             type={lead && LEAD_STEPS[lead.step].key === "email" ? "email" : "text"}
             autoComplete={lead ? LEAD_STEPS[lead.step].key === "email" ? "email" : LEAD_STEPS[lead.step].key === "name" ? "name" : "off" : "off"}
-            placeholder={lead ? "Type your answer…" : "Ask about services, pricing, timelines…"}
+            placeholder={lead ? "Type your answer…" : "Ask in Roman Urdu or English..."}
             aria-label="Message"
             className="h-11 min-w-0 flex-1 rounded-full border border-stroke bg-obsidian/80 px-4 text-base text-zinc-100 transition-[border-color,box-shadow] duration-300 placeholder:text-zinc-600 focus:border-accent/50 focus:shadow-aura focus:outline-none sm:text-sm"
           />
