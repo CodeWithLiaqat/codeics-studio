@@ -1,0 +1,20 @@
+# codeics.me
+User-agent: *
+Allow: /
+Disallow: /404
+Disallow: /*?*utm_
+Disallow: /*?*fbclid=
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://codeics.me/sitemap.xml
