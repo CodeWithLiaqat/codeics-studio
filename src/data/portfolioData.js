@@ -33,14 +33,14 @@ export const portfolioData = [
     },
     gallery: [
       { 
-        src: "/work/lumen-3d-cinematic-cover.jpg", 
+        src: "https://res.cloudinary.com/dnnsv8tzm/image/upload/v1788809325/viewport-3d-image_mycjhv.png", 
         alt: "Lumen hero viewport with exploded driver acoustic architecture", 
         width: 1920, 
         height: 1080 
       },
       { 
-        src: "/work/lumen-02.jpg", 
-        alt: "Exploded view driven by scroll position", 
+        src: "https://res.cloudinary.com/dnnsv8tzm/image/upload/v1788809404/exploded-3d_ijcri2.png", 
+        alt: "Expwloded view driven by scroll position", 
         width: 1600, 
         height: 1000 
       },
