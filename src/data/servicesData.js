@@ -19,7 +19,7 @@ export const servicesData = [
       "Mobile and low-power device tiers",
     ],
     techBadges: ["Three.js", "React Three Fiber", "Drei", "GSAP", "GLSL", "Blender"],
-    startingPrice: "From $3,000",
+    startingPrice: "From $1,500",
     seo: {
       title: "3D Web Development Studio — React Three Fiber & Three.js",
       description:
@@ -47,7 +47,7 @@ export const servicesData = [
       "Secure edge functions and key handling",
     ],
     techBadges: ["React 19", "Supabase", "pgvector", "Edge Functions", "OpenAI / Anthropic APIs"],
-    startingPrice: "From $4,000",
+    startingPrice: "From $2,000",
     seo: {
       title: "AI-Powered Web Applications & Landing Pages",
       description:
@@ -75,7 +75,7 @@ export const servicesData = [
       "Content migration and SEO preservation",
     ],
     techBadges: ["WordPress", "Gutenberg", "WPGraphQL", "PHP 8", "Cloudflare"],
-    startingPrice: "From $2,500",
+    startingPrice: "From $1,150",
     seo: {
       title: "Enterprise & Headless WordPress Development",
       description:
@@ -103,7 +103,7 @@ export const servicesData = [
       "Motion and interaction guidelines",
     ],
     techBadges: ["Figma", "Tailwind CSS", "Storybook", "Radix UI", "WCAG 2.2"],
-    startingPrice: "From $2,000",
+    startingPrice: "From $1,000",
     seo: {
       title: "UI/UX Design Systems — Interactive Creative Agency",
       description:
@@ -131,7 +131,7 @@ export const servicesData = [
       "Continuous monitoring dashboards",
     ],
     techBadges: ["Lighthouse", "CrUX", "WebPageTest", "Vite", "Cloudflare"],
-    startingPrice: "From $1,000",
+    startingPrice: "From $500",
     seo: {
       title: "High Performance Web Design & Core Web Vitals Audits",
       description:

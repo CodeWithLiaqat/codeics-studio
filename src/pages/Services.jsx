@@ -16,7 +16,7 @@ export default function Services() {
     <>
       <SEO
         title="Services"
-        description="3D interactive web, AI web apps, enterprise WordPress, UI/UX design systems and Core Web Vitals audits. Custom scopes from $1,000."
+        description="3D interactive web, AI web apps, enterprise WordPress, UI/UX design systems and Core Web Vitals audits. Custom scopes from $500."
         path="/services"
         schemas={[buildBreadcrumbs(crumbs), ...list.map(buildService)]}
       />
