@@ -154,15 +154,15 @@ export const leadFormOptions = {
     { value: "other", label: "Something else" },
   ],
   budgetRanges: [
-    { value: "1k-3k", label: "$1k – $3k" },
-    { value: "3k-5k", label: "$3k – $5k" },
-    { value: "5k-10k", label: "$5k – $10k" },
-    { value: "10k-plus", label: "$10k+" },
+    { value: "500-1k", label: "$500 – $1k" },
+    { value: "1k-2k", label: "$1k – $2k" },
+    { value: "2k-3k", label: "$2k – $3k" },
+    { value: "3k-plus", label: "$3k+" },
   ],
   timelines: [
     { value: "asap", label: "As soon as possible" },
     { value: "1-2-months", label: "1–2 months" },
-    { value: "3-plus-months", label: "3+ months" },
+    { value: "2-plus-months", label: "2+ months" },
     { value: "exploring", label: "Just exploring" },
   ],
 };

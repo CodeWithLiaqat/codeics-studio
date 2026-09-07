@@ -22,13 +22,28 @@ export const portfolioData = [
     ],
     techTags: ["React 19", "Three.js", "React Three Fiber", "GSAP", "Vite"],
     services: ["3d-interactive-web", "web-performance-audits"],
-    liveUrl: "https://lumen.codeics.me",
+    liveUrl: "https://lumen-3d-website.vercel.app/",
     repoUrl: "",
     year: 2025,
-    cover: { src: "/work/lumen-cover.jpg", alt: "Lumen headphones rendered in a dark WebGL scene", width: 1600, height: 1000 },
+    cover: { 
+      src: "https://res.cloudinary.com/dnnsv8tzm/image/upload/v1788808776/lumen-3d-website_sdzmyb.webp", 
+      alt: "Lumen 3D audiophile headphones with dynamic neon rim lighting and volumetric studio reflections", 
+      width: 1920, 
+      height: 1080 
+    },
     gallery: [
-      { src: "/work/lumen-01.jpg", alt: "Lumen hero section with rotating headphones", width: 1600, height: 1000 },
-      { src: "/work/lumen-02.jpg", alt: "Exploded view driven by scroll position", width: 1600, height: 1000 },
+      { 
+        src: "/work/lumen-3d-cinematic-cover.jpg", 
+        alt: "Lumen hero viewport with exploded driver acoustic architecture", 
+        width: 1920, 
+        height: 1080 
+      },
+      { 
+        src: "/work/lumen-02.jpg", 
+        alt: "Exploded view driven by scroll position", 
+        width: 1600, 
+        height: 1000 
+      },
     ],
     seo: {
       title: "Lumen 3D Product Landing Page Case Study",
