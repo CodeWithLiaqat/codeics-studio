@@ -17,4 +17,13 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: GeminiBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: CopilotBot
+Allow: /
+
 Sitemap: https://codeics.me/sitemap.xml
