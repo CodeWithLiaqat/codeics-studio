@@ -1,8 +1,7 @@
-# codeics.me
+# www.codeics.me
 User-agent: *
 Allow: /
 Disallow: /404
-Disallow: /*?*utm_
-Disallow: /*?*fbclid=
 
-Sitemap: https://codeics.me/sitemap.xml
+# Sitemaps & LLM Context
+Sitemap: https://www.codeics.me/sitemap.xml
