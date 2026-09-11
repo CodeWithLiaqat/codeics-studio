@@ -14,27 +14,27 @@ export default function Breadcrumbs({ items, withSchema = false, className = "" 
   return (
     <>
       {withSchema && <SEO schemas={[buildBreadcrumbs(items)]} />}
-      <nav aria-label="Breadcrumbs" className={`text-xs tracking-wide text-zinc-500 ${className}`}>
+      <nav aria-label="Breadcrumbs" className={`text-xs tracking-wide text-zinc-400 ${className}`}>
         <ol className="flex flex-wrap items-center gap-1.5">
           {items.map((c, i) => {
             const last = i === items.length - 1;
             return (
               <li key={`${c.href}-${i}`} className="inline-flex items-center gap-1.5">
                 {last ? (
-                  <span aria-current="page" className="font-medium text-zinc-300 py-1">
+                  <span aria-current="page" className="font-medium text-zinc-200 py-1">
                     {c.label}
                   </span>
                 ) : (
                   <Link
                     to={c.href}
-                    className="inline-flex items-center py-1 transition-colors hover:text-emerald-400 focus-visible:outline-none focus-visible:text-emerald-400"
+                    className="inline-flex items-center py-1 text-zinc-400 transition-colors hover:text-emerald-400 focus-visible:outline-none focus-visible:text-emerald-400"
                   >
                     {c.label}
                   </Link>
                 )}
                 {!last && (
                   <ChevronRight
-                    className="h-3 w-3 shrink-0 text-zinc-600"
+                    className="h-3 w-3 shrink-0 text-zinc-400"
                     aria-hidden="true"
                     focusable="false"
                   />
