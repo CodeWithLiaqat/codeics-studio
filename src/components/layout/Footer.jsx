@@ -17,7 +17,7 @@ export default function Footer() {
       <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-8 lg:py-20">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(3,1fr)] lg:gap-12">
           <div className="flex flex-col gap-6">
-            <Link to="/" className="flex items-center gap-2.5" aria-label={`${siteConfig.name} home`}>
+            <Link to="/" className="flex min-h-[44px] items-center gap-2.5" aria-label={`${siteConfig.name} home`}>
               <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
               <span className="font-display text-lg font-semibold tracking-tight text-zinc-50">{siteConfig.name}</span>
             </Link>
@@ -36,10 +36,12 @@ export default function Footer() {
                 {siteConfig.contact.email}
               </a>
               {siteConfig.contact.secondaryEmail && (
-                <a href={`mailto:${siteConfig.contact.secondaryEmail}`} className="block text-zinc-300 transition-colors hover:text-emerald-400">{siteConfig.contact.secondaryEmail}</a>
+                <a href={`mailto:${siteConfig.contact.secondaryEmail}`} className="inline-flex min-h-[44px] items-center text-zinc-300 transition-colors hover:text-emerald-400">
+                  {siteConfig.contact.secondaryEmail}
+                </a>
               )}
               {siteConfig.contact.phone && (
-                <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} className="mt-1 inline-flex items-center gap-2 text-zinc-300 transition-colors hover:text-emerald-400">
+                <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} className="inline-flex min-h-[44px] items-center gap-2 text-zinc-300 transition-colors hover:text-emerald-400">
                   <Phone className="h-4 w-4" aria-hidden="true" />
                   {siteConfig.contact.phone}
                 </a>
@@ -62,7 +64,7 @@ export default function Footer() {
                       target="_blank"
                       rel="noopener noreferrer me"
                       aria-label={socialLabels[key]}
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.07] bg-[#0b0b0f] text-zinc-400 transition-colors hover:border-emerald-500/40 hover:text-emerald-400"
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.07] bg-[#0b0b0f] text-zinc-400 transition-colors hover:border-emerald-500/40 hover:text-emerald-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
                     >
                       <Icon className="h-4 w-4" aria-hidden="true" />
                     </a>
@@ -73,12 +75,12 @@ export default function Footer() {
           </div>
 
           {navigation.footer.map((group) => (
-            <nav key={group.heading} aria-label={group.heading}>
-              <h2 className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-500">{group.heading}</h2>
-              <ul className="mt-5 flex flex-col gap-3">
+            <nav key={group.heading} aria-label={`Footer ${group.heading}`}>
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-500">{group.heading}</p>
+              <ul className="mt-5 flex flex-col gap-1">
                 {group.links.map((l) => (
                   <li key={l.href}>
-                    <Link to={l.href} className="inline-flex min-h-[36px] items-center text-sm text-zinc-300 transition-colors hover:text-emerald-400">
+                    <Link to={l.href} className="inline-flex min-h-[44px] items-center text-sm text-zinc-300 transition-colors hover:text-emerald-400">
                       {l.label}
                     </Link>
                   </li>

@@ -91,7 +91,15 @@ export default function Header() {
       );
     }
     return (
-      <NavLink to={item.href} end={item.href === "/"} className={mobile ? `${mobileCls} aria-[current=page]:text-emerald-400` : desktopLink}>
+      <NavLink
+        to={item.href}
+        end={item.href === "/"}
+        className={({ isActive }) =>
+          mobile
+            ? `${mobileCls} ${isActive ? "text-emerald-400 font-semibold" : ""}`
+            : desktopLink({ isActive })
+        }
+      >
         {item.label}
       </NavLink>
     );
@@ -123,26 +131,34 @@ export default function Header() {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls="mobile-menu"
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.07] bg-[#0b0b0f] text-zinc-200 md:hidden"
+          aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.07] bg-[#0b0b0f] text-zinc-200 md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
         >
           {open ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
         </button>
       </nav>
 
-      <div
-        aria-hidden="true"
-        onClick={() => setOpen(false)}
-        className={`fixed inset-0 top-16 z-30 bg-black/60 transition-opacity duration-300 md:hidden ${open ? "opacity-100" : "pointer-events-none opacity-0"}`}
-      />
+      {/* Accessible Backdrop Overlay */}
+      {open && (
+        <button
+          type="button"
+          tabIndex={-1}
+          aria-label="Close navigation overlay"
+          onClick={() => setOpen(false)}
+          className="fixed inset-0 top-16 z-30 bg-black/60 backdrop-blur-sm md:hidden cursor-default"
+        />
+      )}
+
+      {/* Mobile Drawer (Tree-friendly visibility control) */}
       <div
         id="mobile-menu"
         role="dialog"
         aria-modal="true"
-        aria-label="Menu"
-        aria-hidden={!open}
+        aria-label="Mobile Navigation Menu"
         className={`fixed inset-x-0 top-16 z-40 flex max-h-[calc(100dvh-4rem)] flex-col overflow-y-auto border-t border-white/[0.07] bg-[#050505]/95 pb-[max(24px,env(safe-area-inset-bottom))] backdrop-blur-xl transition-[opacity,transform] duration-300 ease-out md:hidden ${
-          open ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-3 opacity-0"
+          open
+            ? "translate-y-0 opacity-100 visible"
+            : "-translate-y-3 opacity-0 invisible pointer-events-none"
         }`}
       >
         <ul className="flex flex-col gap-1 px-4 pt-6">
@@ -153,13 +169,24 @@ export default function Header() {
             {navigation.cta.label}
           </MagneticLink>
           <div className="grid grid-cols-3 gap-2">
-            <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} className="flex min-h-[48px] flex-col items-center justify-center gap-1 rounded-xl border border-white/[0.07] bg-[#0b0b0f] text-xs text-zinc-300">
+            <a
+              href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
+              className="flex min-h-[48px] flex-col items-center justify-center gap-1 rounded-xl border border-white/[0.07] bg-[#0b0b0f] text-xs text-zinc-300 hover:border-white/20 transition-colors"
+            >
               <Phone className="h-4 w-4 text-emerald-400" aria-hidden="true" />Call
             </a>
-            <a href={siteConfig.contact.whatsapp} target="_blank" rel="noopener noreferrer" className="flex min-h-[48px] flex-col items-center justify-center gap-1 rounded-xl border border-white/[0.07] bg-[#0b0b0f] text-xs text-zinc-300">
+            <a
+              href={siteConfig.contact.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex min-h-[48px] flex-col items-center justify-center gap-1 rounded-xl border border-white/[0.07] bg-[#0b0b0f] text-xs text-zinc-300 hover:border-white/20 transition-colors"
+            >
               <MessageCircle className="h-4 w-4 text-emerald-400" aria-hidden="true" />WhatsApp
             </a>
-            <a href={`mailto:${siteConfig.contact.email}`} className="flex min-h-[48px] flex-col items-center justify-center gap-1 rounded-xl border border-white/[0.07] bg-[#0b0b0f] text-xs text-zinc-300">
+            <a
+              href={`mailto:${siteConfig.contact.email}`}
+              className="flex min-h-[48px] flex-col items-center justify-center gap-1 rounded-xl border border-white/[0.07] bg-[#0b0b0f] text-xs text-zinc-300 hover:border-white/20 transition-colors"
+            >
               <Mail className="h-4 w-4 text-emerald-400" aria-hidden="true" />Email
             </a>
           </div>

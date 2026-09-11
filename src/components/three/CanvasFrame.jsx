@@ -58,12 +58,17 @@ export default function CanvasFrame({
       ref={ref}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
-      role="img"
-      aria-label={label}
       style={{ "--mx": "50%", "--my": "40%", "--rx": "0deg", "--ry": "0deg" }}
       className={`relative w-full max-w-full touch-pan-y overflow-hidden rounded-2xl border border-stroke bg-obsidian-100 sm:rounded-3xl [perspective:1200px] ${aspect} ${minHeight} ${className}`}
     >
-      <div className="absolute inset-0 transition-transform duration-500 ease-out will-change-transform [transform:rotateX(var(--rx))_rotateY(var(--ry))]">
+      {/* Accessible screen reader description without breaking child tree */}
+      <span className="sr-only">{label}</span>
+
+      {/* Decorative procedural background (Hidden from accessibility tree) */}
+      <div 
+        aria-hidden="true" 
+        className="pointer-events-none absolute inset-0 transition-transform duration-500 ease-out will-change-transform [transform:rotateX(var(--rx))_rotateY(var(--ry))]"
+      >
         <div className="absolute inset-0 bg-[radial-gradient(600px_circle_at_var(--mx)_var(--my),rgba(16,185,129,0.22),transparent_55%)] transition-[background-position] duration-300" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_at_var(--mx)_var(--my),black_20%,transparent_70%)]" />
         <div className="absolute left-1/2 top-1/2 h-[46%] w-[46%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-emerald-500/30 [box-shadow:inset_0_0_80px_rgba(16,185,129,0.15),0_0_120px_rgba(16,185,129,0.12)] motion-safe:animate-[spin_40s_linear_infinite]">
@@ -71,7 +76,13 @@ export default function CanvasFrame({
         </div>
         <div className="absolute left-1/2 top-1/2 h-[28%] w-[28%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(255,255,255,0.10),rgba(11,11,15,0.9)_60%)] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] motion-safe:animate-[pulse_6s_ease-in-out_infinite]" />
       </div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#0b0b0f] to-transparent" />
+
+      <div 
+        aria-hidden="true" 
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#0b0b0f] to-transparent" 
+      />
+
+      {/* R3F Canvas Container */}
       <Suspense fallback={<SceneFallback />}>{children}</Suspense>
     </div>
   );

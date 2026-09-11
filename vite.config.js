@@ -4,20 +4,39 @@ import { fileURLToPath, URL } from "node:url";
 
 export default defineConfig({
   plugins: [react()],
-  resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
   build: {
-    target: "es2020",
+    target: "es2022",
     sourcemap: false,
     cssCodeSplit: true,
+    chunkSizeWarningLimit: 900,
     rollupOptions: {
       output: {
-        manualChunks: {
-          react: ["react", "react-dom", "react-router-dom"],
-          supabase: ["@supabase/supabase-js"],
-          icons: ["lucide-react"],
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            // Core React runtime
+            if (id.includes("react") || id.includes("react-dom") || id.includes("react-router-dom")) {
+              return "vendor-react";
+            }
+            // 3D & WebGL Engine (Heavy chunk isolated from initial page paint)
+            if (id.includes("three") || id.includes("@react-three")) {
+              return "vendor-three";
+            }
+            // Backend & Database
+            if (id.includes("@supabase")) {
+              return "vendor-supabase";
+            }
+          }
         },
       },
     },
   },
-  server: { port: 5173, open: false },
+  server: {
+    port: 5173,
+    open: false,
+  },
 });

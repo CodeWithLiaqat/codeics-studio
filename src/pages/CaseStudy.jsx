@@ -18,28 +18,67 @@ export default function CaseStudy() {
   const prev = sorted[(idx - 1 + sorted.length) % sorted.length];
   const next = sorted[(idx + 1) % sorted.length];
   const services = servicesData.filter((s) => p.services.includes(s.id));
-  const crumbs = [{ label: "Home", href: "/" }, { label: "Work", href: "/work" }, { label: p.title, href: `/work/${p.slug}` }];
+  const crumbs = [
+    { label: "Home", href: "/" },
+    { label: "Work", href: "/work" },
+    { label: p.title, href: `/work/${p.slug}` },
+  ];
 
   return (
     <>
-      <SEO title={p.seo.title} description={p.seo.description} path={`/work/${p.slug}`} image={p.cover.src} type="article" schemas={[buildBreadcrumbs(crumbs), buildCreativeWork(p)]} />
-      <PageHeader eyebrow={`${p.type} · ${p.client} · ${p.year}`} title={p.title} description={p.summary} crumbs={crumbs}>
-        {p.liveUrl && <MagneticButton href={p.liveUrl} variant="ghost" target="_blank" rel="noopener noreferrer">Live preview</MagneticButton>}
+      <SEO
+        title={p.seo.title}
+        description={p.seo.description}
+        path={`/work/${p.slug}`}
+        image={p.cover.src}
+        type="article"
+        schemas={[buildBreadcrumbs(crumbs), buildCreativeWork(p)]}
+      />
+      
+      <PageHeader
+        eyebrow={`${p.type} · ${p.client} · ${p.year}`}
+        title={p.title}
+        description={p.summary}
+        crumbs={crumbs}
+      >
+        {p.liveUrl && (
+          <MagneticButton
+            href={p.liveUrl}
+            variant="ghost"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open live preview for ${p.title}`}
+          >
+            Live preview
+          </MagneticButton>
+        )}
       </PageHeader>
 
       <article className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-8 lg:py-16">
         <figure className="overflow-hidden rounded-3xl border border-white/[0.07] bg-[#0b0b0f]">
           <div className="relative w-full" style={{ aspectRatio: `${p.cover.width} / ${p.cover.height}` }}>
-            <img src={p.cover.src} alt={p.cover.alt} width={p.cover.width} height={p.cover.height} loading="eager" fetchPriority="high" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+            <img
+              src={p.cover.src}
+              alt={p.cover.alt}
+              width={p.cover.width}
+              height={p.cover.height}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
           </div>
         </figure>
 
+        {/* Metrics Grid with Semantic HTML Order */}
         <dl className="mt-8 grid gap-4 sm:grid-cols-3">
           {p.metrics.map((m) => (
-            <div key={m.label} className="rounded-3xl border border-white/[0.07] bg-[#0b0b0f] p-6">
-              <dd className="font-display text-3xl font-semibold tracking-tight text-emerald-400 sm:text-4xl">{m.value}</dd>
-              <dt className="mt-2 text-sm text-zinc-200">{m.label}</dt>
-              <dd className="mt-1 text-xs text-zinc-500">{m.note}</dd>
+            <div key={m.label} className="flex flex-col rounded-3xl border border-white/[0.07] bg-[#0b0b0f] p-6">
+              <dt className="order-2 mt-2 text-sm font-medium text-zinc-200">{m.label}</dt>
+              <dd className="order-1 font-display text-3xl font-semibold tracking-tight text-emerald-400 sm:text-4xl">
+                {m.value}
+              </dd>
+              {m.note && <dd className="order-3 mt-1 text-xs text-zinc-500">{m.note}</dd>}
             </div>
           ))}
         </dl>
@@ -47,19 +86,37 @@ export default function CaseStudy() {
         <div className="mt-14 grid gap-12 grid-cols-1 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="flex flex-col gap-12">
             <section aria-labelledby="challenge-heading" className="flex flex-col gap-4">
-              <h2 id="challenge-heading" className="text-xs font-medium uppercase tracking-[0.18em] text-emerald-400">Challenge</h2>
-              <p className="text-pretty text-xl leading-relaxed text-zinc-200 sm:text-2xl">{p.challenge}</p>
+              <h2 id="challenge-heading" className="text-xs font-medium uppercase tracking-[0.18em] text-emerald-400">
+                Challenge
+              </h2>
+              <p className="text-pretty text-xl leading-relaxed text-zinc-200 sm:text-2xl">
+                {p.challenge}
+              </p>
             </section>
+
             <section aria-labelledby="solution-heading" className="flex flex-col gap-4">
-              <h2 id="solution-heading" className="text-xs font-medium uppercase tracking-[0.18em] text-emerald-400">Solution</h2>
-              <p className="text-pretty text-lg leading-relaxed text-zinc-300">{p.solution}</p>
+              <h2 id="solution-heading" className="text-xs font-medium uppercase tracking-[0.18em] text-emerald-400">
+                Solution
+              </h2>
+              <p className="text-pretty text-lg leading-relaxed text-zinc-300">
+                {p.solution}
+              </p>
             </section>
-            {p.gallery.length > 0 && (
-              <section aria-label="Gallery" className="grid gap-4 sm:grid-cols-2">
+
+            {p.gallery && p.gallery.length > 0 && (
+              <section aria-label="Project screenshot gallery" className="grid gap-4 sm:grid-cols-2">
                 {p.gallery.map((g) => (
                   <figure key={g.src} className="overflow-hidden rounded-2xl border border-white/[0.07] bg-[#0b0b0f]">
                     <div className="relative w-full" style={{ aspectRatio: `${g.width} / ${g.height}` }}>
-                      <img src={g.src} alt={g.alt} width={g.width} height={g.height} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+                      <img
+                        src={g.src}
+                        alt={g.alt}
+                        width={g.width}
+                        height={g.height}
+                        loading="lazy"
+                        decoding="async"
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
                     </div>
                     <figcaption className="px-4 py-3 text-xs text-zinc-500">{g.alt}</figcaption>
                   </figure>
@@ -68,35 +125,74 @@ export default function CaseStudy() {
             )}
           </div>
 
-          <aside className="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
+          <aside aria-label="Project metadata and specifications" className="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-3xl border border-white/[0.07] bg-[#0b0b0f] p-6">
               <dl className="flex flex-col gap-5 text-sm">
-                <div><dt className="text-xs uppercase tracking-[0.16em] text-zinc-500">Client</dt><dd className="mt-1 text-zinc-200">{p.client}</dd></div>
-                <div><dt className="text-xs uppercase tracking-[0.16em] text-zinc-500">Industry</dt><dd className="mt-1 text-zinc-200">{p.industry}</dd></div>
+                <div>
+                  <dt className="text-xs uppercase tracking-[0.16em] text-zinc-500">Client</dt>
+                  <dd className="mt-1 font-medium text-zinc-200">{p.client}</dd>
+                </div>
+                <div>
+                  <dt className="text-xs uppercase tracking-[0.16em] text-zinc-500">Industry</dt>
+                  <dd className="mt-1 font-medium text-zinc-200">{p.industry}</dd>
+                </div>
                 <div>
                   <dt className="text-xs uppercase tracking-[0.16em] text-zinc-500">Services</dt>
                   <dd className="mt-2 flex flex-col gap-1">
-                    {services.map((s) => <Link key={s.id} to={`/services/${s.slug}`} className="inline-flex items-center gap-1 text-zinc-200 hover:text-emerald-400">{s.title} <ArrowUpRight className="h-3 w-3" aria-hidden="true" /></Link>)}
+                    {services.map((s) => (
+                      <Link
+                        key={s.id}
+                        to={`/services/${s.slug}`}
+                        className="inline-flex min-h-[36px] items-center gap-1 text-zinc-200 hover:text-emerald-400 focus-visible:outline-none focus-visible:text-emerald-400"
+                      >
+                        {s.title} <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+                      </Link>
+                    ))}
                   </dd>
                 </div>
                 <div>
                   <dt className="text-xs uppercase tracking-[0.16em] text-zinc-500">Stack</dt>
-                  <dd className="mt-2 flex flex-wrap gap-1.5">{p.techTags.map((t) => <span key={t} className="rounded-full border border-white/[0.07] bg-[#050505] px-2.5 py-1 text-[11px] text-zinc-300">{t}</span>)}</dd>
+                  <dd className="mt-2 flex flex-wrap gap-1.5">
+                    {p.techTags.map((t) => (
+                      <span key={t} className="rounded-full border border-white/[0.07] bg-[#050505] px-2.5 py-1 text-[11px] text-zinc-300">
+                        {t}
+                      </span>
+                    ))}
+                  </dd>
                 </div>
               </dl>
-              <MagneticButton to="/contact#intake-form" className="mt-6 w-full">Build something similar</MagneticButton>
+              <MagneticButton to="/contact#intake-form" className="mt-6 w-full">
+                Build something similar
+              </MagneticButton>
             </div>
           </aside>
         </div>
 
-        <nav aria-label="More case studies" className="mt-16 grid gap-4 border-t border-white/[0.07] pt-8 sm:grid-cols-2">
-          <Link to={`/work/${prev.slug}`} className="group flex flex-col gap-1 rounded-2xl p-4 transition-colors hover:bg-white/[0.03]">
-            <span className="inline-flex items-center gap-1 text-xs text-zinc-500"><ArrowLeft className="h-3 w-3" aria-hidden="true" /> Previous</span>
-            <span className="font-display text-lg text-zinc-100 group-hover:text-emerald-300">{prev.title}</span>
+        <nav aria-label="More case studies navigation" className="mt-16 grid gap-4 border-t border-white/[0.07] pt-8 sm:grid-cols-2">
+          <Link
+            to={`/work/${prev.slug}`}
+            aria-label={`Previous case study: ${prev.title}`}
+            className="group flex min-h-[56px] flex-col gap-1 rounded-2xl p-4 transition-colors hover:bg-white/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+          >
+            <span className="inline-flex items-center gap-1 text-xs text-zinc-500">
+              <ArrowLeft className="h-3 w-3" aria-hidden="true" /> Previous
+            </span>
+            <span className="font-display text-lg text-zinc-100 group-hover:text-emerald-300">
+              {prev.title}
+            </span>
           </Link>
-          <Link to={`/work/${next.slug}`} className="group flex flex-col items-end gap-1 rounded-2xl p-4 text-right transition-colors hover:bg-white/[0.03]">
-            <span className="inline-flex items-center gap-1 text-xs text-zinc-500">Next <ArrowRight className="h-3 w-3" aria-hidden="true" /></span>
-            <span className="font-display text-lg text-zinc-100 group-hover:text-emerald-300">{next.title}</span>
+
+          <Link
+            to={`/work/${next.slug}`}
+            aria-label={`Next case study: ${next.title}`}
+            className="group flex min-h-[56px] flex-col items-end gap-1 rounded-2xl p-4 text-right transition-colors hover:bg-white/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+          >
+            <span className="inline-flex items-center gap-1 text-xs text-zinc-500">
+              Next <ArrowRight className="h-3 w-3" aria-hidden="true" />
+            </span>
+            <span className="font-display text-lg text-zinc-100 group-hover:text-emerald-300">
+              {next.title}
+            </span>
           </Link>
         </nav>
       </article>
