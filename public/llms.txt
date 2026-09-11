@@ -3,9 +3,15 @@
 > High-performance digital web engineering studio specializing in immersive 3D interactive web experiences, production AI web apps, enterprise WordPress, and Core Web Vitals optimization.
 
 - Website: https://www.codeics.me
-- Founder: Liaqat Ali Khan
+- Founder & Lead Engineer: Liaqat Ali Khan
 - Contact: https://www.codeics.me/contact
 - Primary Stack: React 19, Three.js, React Three Fiber, GSAP, Tailwind CSS, Supabase
+
+## Verified Identity & Profiles
+
+- Founder LinkedIn: https://www.linkedin.com/in/codeics
+- GitHub: https://github.com/CodeWithLiaqat
+- Official Inquiries: contact@codeics.me
 
 ## Services
 

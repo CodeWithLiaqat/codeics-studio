@@ -21,9 +21,6 @@
     <link rel="apple-touch-icon" href="/og/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     
-    <!-- Preload Fonts -->
-    <link rel="preload" href="/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
-    
     <!-- OpenGraph (Facebook, LinkedIn, AI Scrapers) -->
     <meta property="og:site_name" content="Codeics" />
     <meta property="og:type" content="website" />
@@ -53,11 +50,18 @@
           "name": "Codeics",
           "url": "https://www.codeics.me/",
           "logo": "https://www.codeics.me/favicon.svg",
+          "sameAs": [
+            "https://www.codeics.me"
+          ],
           "founder": {
             "@type": "Person",
+            "@id": "https://www.codeics.me/#founder",
             "name": "Liaqat Ali Khan",
             "jobTitle": "Founder & Lead AI Web Engineer",
-            "url": "https://www.codeics.me/"
+            "url": "https://www.codeics.me/",
+            "sameAs": [
+              "https://www.linkedin.com/in/codeics"
+            ]
           },
           "contactPoint": {
             "@type": "ContactPoint",
@@ -79,18 +83,13 @@
     </script>
 
     <style>
-      @font-face {
-        font-family: "Geist";
-        src: url("/fonts/Geist-Variable.woff2") format("woff2");
-        font-weight: 100 900;
-        font-display: swap;
-      }
       html, body { 
         margin: 0; 
         background: #030303; 
         color: #f4f4f5; 
         overflow-x: hidden; 
         max-width: 100vw; 
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       }
       #root { min-height: 100dvh; }
     </style>
