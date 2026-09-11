@@ -21,33 +21,33 @@ export default function Footer() {
               <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
               <span className="font-display text-lg font-semibold tracking-tight text-zinc-50">{siteConfig.name}</span>
             </Link>
-            <p className="max-w-sm text-sm leading-relaxed text-zinc-400">{siteConfig.description}</p>
+            <p className="max-w-sm text-sm leading-relaxed text-zinc-300">{siteConfig.description}</p>
 
-            <address className="break-words not-italic text-sm leading-relaxed text-zinc-400">
-              <p className="text-zinc-200">{siteConfig.founder.name}</p>
-              <p>{siteConfig.founder.title}</p>
+            <address className="break-words not-italic text-sm leading-relaxed text-zinc-300">
+              <p className="font-medium text-zinc-100">{siteConfig.founder.name}</p>
+              <p className="text-zinc-400">{siteConfig.founder.title}</p>
               {hasAddress && (
-                <p>
+                <p className="text-zinc-400">
                   {[address.streetAddress, address.addressLocality, address.addressRegion, address.postalCode].filter(Boolean).join(", ")}
                 </p>
               )}
-              <a href={`mailto:${siteConfig.contact.email}`} className="mt-2 inline-flex min-h-[44px] items-center gap-2 text-zinc-300 transition-colors hover:text-emerald-400">
+              <a href={`mailto:${siteConfig.contact.email}`} className="mt-2 inline-flex min-h-[44px] items-center gap-2 text-zinc-200 transition-colors hover:text-emerald-400">
                 <Mail className="h-4 w-4" aria-hidden="true" />
                 {siteConfig.contact.email}
               </a>
               {siteConfig.contact.secondaryEmail && (
-                <a href={`mailto:${siteConfig.contact.secondaryEmail}`} className="inline-flex min-h-[44px] items-center text-zinc-300 transition-colors hover:text-emerald-400">
+                <a href={`mailto:${siteConfig.contact.secondaryEmail}`} className="inline-flex min-h-[44px] items-center text-zinc-200 transition-colors hover:text-emerald-400">
                   {siteConfig.contact.secondaryEmail}
                 </a>
               )}
               {siteConfig.contact.phone && (
-                <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} className="inline-flex min-h-[44px] items-center gap-2 text-zinc-300 transition-colors hover:text-emerald-400">
+                <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} className="inline-flex min-h-[44px] items-center gap-2 text-zinc-200 transition-colors hover:text-emerald-400">
                   <Phone className="h-4 w-4" aria-hidden="true" />
                   {siteConfig.contact.phone}
                 </a>
               )}
               {siteConfig.contact.whatsapp && (
-                <a href={siteConfig.contact.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center gap-2 text-zinc-300 transition-colors hover:text-emerald-400">
+                <a href={siteConfig.contact.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center gap-2 text-zinc-200 transition-colors hover:text-emerald-400">
                   <MessageCircle className="h-4 w-4" aria-hidden="true" />
                   WhatsApp
                 </a>
@@ -64,7 +64,7 @@ export default function Footer() {
                       target="_blank"
                       rel="noopener noreferrer me"
                       aria-label={socialLabels[key]}
-                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.07] bg-[#0b0b0f] text-zinc-400 transition-colors hover:border-emerald-500/40 hover:text-emerald-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.12] bg-[#0b0b0f] text-zinc-200 transition-colors hover:border-emerald-500/40 hover:text-emerald-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
                     >
                       <Icon className="h-4 w-4" aria-hidden="true" />
                     </a>
@@ -76,11 +76,11 @@ export default function Footer() {
 
           {navigation.footer.map((group) => (
             <nav key={group.heading} aria-label={`Footer ${group.heading}`}>
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-500">{group.heading}</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-300">{group.heading}</p>
               <ul className="mt-5 flex flex-col gap-1">
                 {group.links.map((l) => (
                   <li key={l.href}>
-                    <Link to={l.href} className="inline-flex min-h-[44px] items-center text-sm text-zinc-300 transition-colors hover:text-emerald-400">
+                    <Link to={l.href} className="inline-flex min-h-[44px] items-center text-sm text-zinc-200 transition-colors hover:text-emerald-400">
                       {l.label}
                     </Link>
                   </li>
@@ -90,7 +90,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-white/[0.07] pt-8 text-xs text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-16 flex flex-col gap-4 border-t border-white/[0.1] pt-8 text-xs text-zinc-400 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {siteConfig.legalName}. All rights reserved.
           </p>
