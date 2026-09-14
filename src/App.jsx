@@ -3,7 +3,10 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 
-const Home = lazy(() => import("./pages/Home"));
+// Critical landing page MUST be direct import to eliminate mobile LCP/CLS latency
+import Home from "./pages/Home";
+
+// Non-critical secondary routes remain dynamically split
 const Services = lazy(() => import("./pages/Services"));
 const ServiceDetail = lazy(() => import("./pages/ServiceDetail"));
 const Work = lazy(() => import("./pages/Work"));
@@ -19,18 +22,13 @@ function ScrollManager() {
 
   useEffect(() => {
     if (hash) {
-      let tries = 0;
-      const seek = () => {
+      const timer = setTimeout(() => {
         const el = document.getElementById(hash.slice(1));
         if (el) {
-          const top = el.getBoundingClientRect().top + window.scrollY - 80;
-          window.scrollTo({ top, behavior: "smooth" });
-        } else if (tries++ < 30) {
-          requestAnimationFrame(seek);
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
-      };
-      seek();
-      return;
+      }, 50);
+      return () => clearTimeout(timer);
     }
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [pathname, hash]);
@@ -42,7 +40,7 @@ function RouteFallback() {
   return (
     <div 
       aria-hidden="true" 
-      className="min-h-[70vh] flex items-center justify-center"
+      className="min-h-[100dvh] flex items-center justify-center bg-[#050505]"
     >
       <div className="h-6 w-6 animate-spin rounded-full border-2 border-emerald-500/20 border-t-emerald-500" />
     </div>
