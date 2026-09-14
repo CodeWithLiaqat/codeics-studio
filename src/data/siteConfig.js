@@ -5,17 +5,17 @@ export const siteConfig = {
   tagline: "3D & AI Creative Web Studio",
   description:
     "Codeics is a 3D web development studio and interactive creative agency. React Three Fiber & GSAP developers building high-performance websites, AI-powered web applications and landing pages for B2B companies, tech startups and luxury brands worldwide.",
-  url: "https://codeics.me",
-  logo: "https://codeics.me/favicon.svg",
-  ogImage: "https://res.cloudinary.com/dnnsv8tzm/image/upload/w_1200,h_630,c_fill,q_auto,f_auto/v1789084259/codeics-og_w3uke0.png",
+  url: "https://www.codeics.me",
+  logo: "https://www.codeics.me/favicon.svg",
+  ogImage: "https://res.cloudinary.com/dnnsv8tzm/image/upload/f_auto,q_auto,w_1200,c_limit/v1789084259/codeics-og_w3uke0.png",
   locale: "en_US",
   language: "en",
   founder: {
     name: "Liaqat Ali Khan",
     title: "Creative Web Developer & Designer",
     role: "Founder & Principal Engineer",
-    url: "https://codeics.me/#contact",
-    image: "https://res.cloudinary.com/dnnsv8tzm/image/upload/w_1200,h_630,c_fill,q_auto,f_auto/v1789084259/codeics-og_w3uke0.png",
+    url: "https://www.codeics.me/#contact",
+    image: "https://res.cloudinary.com/dnnsv8tzm/image/upload/f_auto,q_auto,w_400,c_limit/v1789084259/codeics-og_w3uke0.png",
   },
   contact: {
     email: "contact@codeics.me",

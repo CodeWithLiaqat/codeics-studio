@@ -1,0 +1,37 @@
+# Codeics
+
+> High-performance digital web engineering studio specializing in immersive 3D interactive web experiences, production AI web apps, enterprise WordPress, and Core Web Vitals optimization.
+
+- Website: https://www.codeics.me
+- Company LinkedIn: https://www.linkedin.com/company/codeics
+- Founder & Lead Engineer: Liaqat Ali Khan
+- Founder LinkedIn: https://www.linkedin.com/in/codeics
+- Contact: https://www.codeics.me/contact
+- Primary Stack: React 19, Three.js, React Three Fiber, GSAP, Tailwind CSS, Supabase
+
+## Verified Identity & Socials
+
+- Official LinkedIn Company: https://www.linkedin.com/company/codeics
+- Founder LinkedIn: https://www.linkedin.com/in/codeics
+- Official Inquiries: contact@codeics.me
+
+## Services
+
+- [3D Interactive Web](https://www.codeics.me/services/3d-interactive-web): WebGL experiences engineered with Three.js and React Three Fiber running at 60fps. Includes custom GLSL shaders, GSAP camera timelines, Draco/KTX2 asset pipelines, and progressive fallbacks. Starting from $1,500.
+- [AI Web Apps](https://www.codeics.me/services/ai-web-apps): Production-ready AI features embedded into React 19 applications. Includes semantic vector search with Supabase pgvector, streaming LLM workflows, and secure edge execution. Starting from $2,000.
+- [Enterprise WordPress](https://www.codeics.me/services/enterprise-wordpress): Headless and classic WordPress builds with bespoke Gutenberg block libraries, WPGraphQL, and hardened CDN caching. Starting from $1,150.
+- [UI/UX Design Systems](https://www.codeics.me/services/ui-ux-design-systems): Token-based Figma design systems mapped directly to Tailwind CSS architectures adhering to WCAG 2.2 AA accessibility standards. Starting from $1,000.
+- [Web Performance Audits](https://www.codeics.me/services/web-performance-audits): Field (CrUX) and lab audits targeting 95+ Lighthouse scores and Core Web Vitals remediation (LCP, INP, CLS). Starting from $500.
+
+## Selected Work
+
+- [Lumen 3D Landing](https://www.codeics.me/work/lumen-3d-interactive-landing): Interactive WebGL landing experience featuring dynamic camera controls and shader motion.
+- [Atlas AI Workspace](https://www.codeics.me/work/atlas-ai-research-workspace): Full-stack AI application with vector indexing and streaming chat architecture.
+- [Vantage Performance Overhaul](https://www.codeics.me/work/vantage-performance-rebuild): Architecture refactor achieving sub-second LCP and zero layout shifts.
+- [Orbit Design System](https://www.codeics.me/work/orbit-design-system): Production-ready Tailwind UI library with dark luxury aesthetic.
+
+## Technical Guides
+
+- [WebGL Performance in React Three Fiber](https://www.codeics.me/blog/webgl-performance-react-three-fiber): Memory management, draw call batching, and asset compression guide.
+- [Building AI Web Apps with Supabase](https://www.codeics.me/blog/building-ai-web-apps-react-supabase): Practical implementation of embeddings, pgvector, and edge streaming.
+- [Core Web Vitals Remediation](https://www.codeics.me/blog/core-web-vitals-guide-lcp-inp-cls): Diagnostic patterns for modern JavaScript frontends.

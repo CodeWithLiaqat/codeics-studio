@@ -1,0 +1,7 @@
+# www.codeics.me
+User-agent: *
+Allow: /
+Disallow: /404
+
+# Sitemaps & LLM Context
+Sitemap: https://www.codeics.me/sitemap.xml
