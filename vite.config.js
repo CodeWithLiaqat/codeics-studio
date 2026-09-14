@@ -12,7 +12,8 @@ export default defineConfig({
   build: {
     target: "es2022",
     sourcemap: false,
-    cssCodeSplit: true,
+    cssCodeSplit: false,
+    assetsInlineLimit: 15000,
     chunkSizeWarningLimit: 900,
     rollupOptions: {
       output: {
