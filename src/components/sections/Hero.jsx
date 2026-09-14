@@ -13,13 +13,16 @@ export default function Hero() {
       aria-labelledby="hero-heading" 
       className="relative isolate overflow-hidden"
     >
-      <BackgroundBeams intensity={0.12} />
-      <AuroraGlow position="top" />
+      {/* Paint containment isolates decorative backgrounds from LCP */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 [contain:paint]">
+        <BackgroundBeams intensity={0.12} />
+        <AuroraGlow position="top" />
+      </div>
 
       <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pb-16 pt-10 sm:px-8 sm:pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:pb-28 lg:pt-24">
         {/* Left Content Column */}
         <div className="flex min-w-0 flex-col gap-6 sm:gap-8">
-          <p className="glass inline-flex w-fit max-w-full items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-zinc-300 sm:text-xs sm:tracking-[0.14em] motion-safe:animate-fade-up">
+          <p className="glass inline-flex w-fit max-w-full items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-zinc-300 sm:text-xs sm:tracking-[0.14em]">
             <span className="relative flex h-1.5 w-1.5 shrink-0" aria-hidden="true">
               <span className="absolute inline-flex h-full w-full rounded-full bg-accent opacity-70 motion-safe:animate-ping [animation-duration:2.2s]" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent-soft" />
@@ -29,17 +32,17 @@ export default function Hero() {
 
           <h1 
             id="hero-heading" 
-            className="font-display text-balance break-words text-3xl font-semibold leading-[1.04] tracking-tight sm:text-5xl lg:text-7xl motion-safe:animate-fade-up [animation-delay:80ms]"
+            className="font-display text-balance break-words text-3xl font-semibold leading-[1.04] tracking-tight sm:text-5xl lg:text-7xl"
           >
             <span className="text-gradient">{heroContent.headline}</span>{" "}
             <span className="text-shimmer">{heroContent.headlineAccent}</span>
           </h1>
 
-          <p className="max-w-xl text-pretty text-base leading-relaxed text-zinc-400 sm:text-lg motion-safe:animate-fade-up [animation-delay:160ms]">
+          <p className="max-w-xl text-pretty text-base leading-relaxed text-zinc-400 sm:text-lg motion-safe:animate-fade-up [animation-delay:100ms]">
             {heroContent.subheadline}
           </p>
 
-          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap motion-safe:animate-fade-up [animation-delay:240ms]">
+          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap motion-safe:animate-fade-up [animation-delay:180ms]">
             <ShimmerButton to={heroContent.primaryCta.href} className="w-full sm:w-auto">
               {heroContent.primaryCta.label}
             </ShimmerButton>
@@ -48,7 +51,7 @@ export default function Hero() {
             </MovingBorder>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 motion-safe:animate-fade-up [animation-delay:320ms]">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 motion-safe:animate-fade-up [animation-delay:260ms]">
             <a 
               href={heroContent.tertiaryCta.href} 
               target="_blank" 
@@ -90,7 +93,7 @@ export default function Hero() {
             <div 
               key={m.label} 
               className="flex min-w-0 flex-col gap-1 py-5 pr-3 md:px-6 md:py-6 md:first:pl-0 md:last:pr-0 motion-safe:animate-fade-up" 
-              style={{ animationDelay: `${400 + i * 80}ms` }}
+              style={{ animationDelay: `${300 + i * 80}ms` }}
             >
               <dt className="order-2 text-[11px] leading-snug tracking-wide text-zinc-400 sm:text-xs">
                 {m.label}
