@@ -12,7 +12,7 @@
     <meta name="color-scheme" content="dark" />
     <link rel="canonical" href="https://www.codeics.me/" />
     
-    <!-- CDN Preconnect for Fast Asset Loading -->
+    <!-- CDN Preconnect -->
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
     <link rel="dns-prefetch" href="https://res.cloudinary.com" />
 
@@ -21,25 +21,21 @@
     <link rel="apple-touch-icon" href="/og/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     
-    <!-- OpenGraph (Facebook, LinkedIn, AI Scrapers) -->
+    <!-- OpenGraph -->
     <meta property="og:site_name" content="Codeics" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Codeics — 3D Web &amp; AI Engineering Studio" />
     <meta property="og:description" content="Immersive 3D websites, AI web apps and Core Web Vitals-optimized builds for B2B, startups and luxury brands. Founded by Liaqat Ali Khan." />
     <meta property="og:url" content="https://www.codeics.me/" />
     <meta property="og:image" content="https://res.cloudinary.com/dnnsv8tzm/image/upload/f_auto,q_auto:eco,w_1200,c_limit/v1789084259/codeics-og_w3uke0.png" />
-    <meta property="og:image:secure_url" content="https://res.cloudinary.com/dnnsv8tzm/image/upload/f_auto,q_auto:eco,w_1200,c_limit/v1789084259/codeics-og_w3uke0.png" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
 
-    <!-- Twitter / X -->
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Codeics — 3D Web &amp; AI Engineering Studio" />
     <meta name="twitter:description" content="Immersive 3D websites, AI web apps and Core Web Vitals-optimized builds for B2B, startups and luxury brands." />
     <meta name="twitter:image" content="https://res.cloudinary.com/dnnsv8tzm/image/upload/f_auto,q_auto:eco,w_1200,c_limit/v1789084259/codeics-og_w3uke0.png" />
 
-    <!-- Structured Data for Search Engines & AI Bots (Schema.org) -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -50,18 +46,14 @@
           "name": "Codeics",
           "url": "https://www.codeics.me/",
           "logo": "https://www.codeics.me/favicon.svg",
-          "sameAs": [
-            "https://www.linkedin.com/company/codeics"
-          ],
+          "sameAs": ["https://www.linkedin.com/company/codeics"],
           "founder": {
             "@type": "Person",
             "@id": "https://www.codeics.me/#founder",
             "name": "Liaqat Ali Khan",
             "jobTitle": "Founder & Lead AI Web Engineer",
             "url": "https://www.codeics.me/",
-            "sameAs": [
-              "https://www.linkedin.com/in/codeics"
-            ]
+            "sameAs": ["https://www.linkedin.com/in/codeics"]
           },
           "contactPoint": {
             "@type": "ContactPoint",
@@ -93,39 +85,9 @@
       }
       #root { min-height: 100dvh; }
     </style>
-
-    <!-- Eliminate Render-Blocking Stylesheets -->
-    <script>
-      (function() {
-        var links = document.querySelectorAll('link[rel="stylesheet"]');
-        for (var i = 0; i < links.length; i++) {
-          links[i].media = 'print';
-          links[i].onload = function() { this.media = 'all'; };
-        }
-      })();
-    </script>
   </head>
   <body>
     <div id="root"></div>
-    <noscript>
-      <div role="region" aria-label="Non-JavaScript Fallback" style="font-family:system-ui,sans-serif;padding:48px;max-width:720px;margin:auto;line-height:1.6;">
-        <h1>Codeics — 3D Web &amp; AI Engineering Studio</h1>
-        <p>Founder &amp; Engineering Lead: <strong>Liaqat Ali Khan</strong></p>
-        <p>Immersive 3D interactive web experiences (Three.js, React Three Fiber, GSAP), AI web applications, enterprise WordPress, and Core Web Vitals performance optimization.</p>
-        
-        <h2>Core Services &amp; Pricing Tiers</h2>
-        <ul>
-          <li><strong>3D Interactive Web:</strong> WebGL, Three.js, React Three Fiber (Starting from $1,500)</li>
-          <li><strong>AI Web Applications:</strong> Fullstack AI agents, semantic search with Supabase (Starting from $2,000)</li>
-          <li><strong>Enterprise WordPress:</strong> Headless &amp; custom block architecture (Starting from $1,000)</li>
-          <li><strong>UI/UX Design Systems:</strong> Token-based Figma &amp; Tailwind CSS systems (Starting from $1,500)</li>
-          <li><strong>Core Web Vitals Optimization:</strong> INP, LCP &amp; CLS performance audits (Starting from $500)</li>
-        </ul>
-
-        <p>Email: <a href="mailto:contact@codeics.me" style="color:#10b981;">contact@codeics.me</a></p>
-        <p>Machine readable context: <a href="https://www.codeics.me/llms.txt">https://www.codeics.me/llms.txt</a></p>
-      </div>
-    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
