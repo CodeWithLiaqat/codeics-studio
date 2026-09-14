@@ -179,12 +179,13 @@ export default function AIAgent() {
       <section
         id="ai-agent-panel"
         role="dialog"
-        aria-modal={open ? "true" : "false"}
+        aria-modal="true"
         aria-label="Codeics assistant"
-        aria-hidden={!open}
-        inert={!open ? "" : undefined}
+        inert={!open}
         className={`fixed inset-x-0 bottom-0 z-[65] flex h-[85dvh] max-h-[85vh] w-full grain flex-col overflow-hidden rounded-t-2xl border border-stroke-hover bg-[linear-gradient(180deg,rgba(14,14,16,0.85),rgba(3,3,3,0.92))] pb-[env(safe-area-inset-bottom)] shadow-float backdrop-blur-2xl transition-[opacity,transform] duration-400 ease-spring sm:inset-x-auto sm:bottom-[92px] sm:right-6 sm:h-[min(620px,calc(100dvh-120px))] sm:w-96 sm:rounded-3xl sm:pb-0 ${
-          open ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-full opacity-0 sm:translate-y-3"
+          open
+            ? "translate-y-0 opacity-100"
+            : "hidden pointer-events-none translate-y-full opacity-0 sm:translate-y-3"
         }`}
       >
         <header className="relative flex items-center justify-between border-b border-stroke px-4 py-3 sm:px-5 sm:py-4">

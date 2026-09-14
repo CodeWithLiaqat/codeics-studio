@@ -59,11 +59,11 @@ export default function Hero() {
               {heroContent.tertiaryCta.label}
             </a>
             <span className="hidden h-4 w-px bg-stroke sm:block" aria-hidden="true" />
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-zinc-400">
               Led by{" "}
               <Link 
                 to="/contact" 
-                className="text-zinc-300 hover:text-accent-soft focus-visible:outline-none focus-visible:underline"
+                className="text-zinc-200 hover:text-accent-soft focus-visible:outline-none focus-visible:underline"
               >
                 {siteConfig.founder.name}
               </Link>
@@ -92,7 +92,7 @@ export default function Hero() {
               className="flex min-w-0 flex-col gap-1 py-5 pr-3 md:px-6 md:py-6 md:first:pl-0 md:last:pr-0 motion-safe:animate-fade-up" 
               style={{ animationDelay: `${400 + i * 80}ms` }}
             >
-              <dt className="order-2 text-[11px] leading-snug tracking-wide text-zinc-500 sm:text-xs">
+              <dt className="order-2 text-[11px] leading-snug tracking-wide text-zinc-400 sm:text-xs">
                 {m.label}
               </dt>
               <dd className="order-1 font-display text-2xl font-semibold tracking-tight sm:text-3xl">
