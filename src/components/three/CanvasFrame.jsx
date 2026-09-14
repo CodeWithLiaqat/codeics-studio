@@ -17,6 +17,20 @@ export default function CanvasFrame({
   const raf = useRef(0);
   const [reduced, setReduced] = useState(false);
 
+  // Desktop mounts instantly (0ms) — Mobile defers slightly (250ms) to unblock main thread
+  const [canRenderScene, setCanRenderScene] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth >= 768; // Desktop instantly true on first paint
+  });
+
+  useEffect(() => {
+    if (canRenderScene) return;
+    const timer = setTimeout(() => {
+      setCanRenderScene(true);
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [canRenderScene]);
+
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const sync = () => setReduced(mq.matches);
@@ -83,7 +97,9 @@ export default function CanvasFrame({
       />
 
       {/* R3F Canvas Container */}
-      <Suspense fallback={<SceneFallback />}>{children}</Suspense>
+      <Suspense fallback={<SceneFallback />}>
+        {canRenderScene ? children : <SceneFallback />}
+      </Suspense>
     </div>
   );
 }

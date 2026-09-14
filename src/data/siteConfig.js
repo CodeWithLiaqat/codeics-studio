@@ -7,7 +7,7 @@ export const siteConfig = {
     "Codeics is a 3D web development studio and interactive creative agency. React Three Fiber & GSAP developers building high-performance websites, AI-powered web applications and landing pages for B2B companies, tech startups and luxury brands worldwide.",
   url: "https://www.codeics.me",
   logo: "https://www.codeics.me/favicon.svg",
-  ogImage: "https://res.cloudinary.com/dnnsv8tzm/image/upload/f_auto,q_auto,w_1200,c_limit/v1789084259/codeics-og_w3uke0.png",
+  ogImage: "https://res.cloudinary.com/dnnsv8tzm/image/upload/f_auto,q_auto:eco,w_800,c_limit/v1789084259/codeics-og_w3uke0.png",
   locale: "en_US",
   language: "en",
   founder: {
@@ -15,7 +15,7 @@ export const siteConfig = {
     title: "Creative Web Developer & Designer",
     role: "Founder & Principal Engineer",
     url: "https://www.codeics.me/#contact",
-    image: "https://res.cloudinary.com/dnnsv8tzm/image/upload/f_auto,q_auto,w_400,c_limit/v1789084259/codeics-og_w3uke0.png",
+    image: "https://res.cloudinary.com/dnnsv8tzm/image/upload/f_auto,q_auto:eco,w_320,c_limit/v1789084259/codeics-og_w3uke0.png",
   },
   contact: {
     email: "contact@codeics.me",

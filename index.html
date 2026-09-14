@@ -27,8 +27,8 @@
     <meta property="og:title" content="Codeics — 3D Web &amp; AI Engineering Studio" />
     <meta property="og:description" content="Immersive 3D websites, AI web apps and Core Web Vitals-optimized builds for B2B, startups and luxury brands. Founded by Liaqat Ali Khan." />
     <meta property="og:url" content="https://www.codeics.me/" />
-    <meta property="og:image" content="https://res.cloudinary.com/dnnsv8tzm/image/upload/v1789084259/codeics-og_w3uke0.png" />
-    <meta property="og:image:secure_url" content="https://res.cloudinary.com/dnnsv8tzm/image/upload/v1789084259/codeics-og_w3uke0.png" />
+    <meta property="og:image" content="https://res.cloudinary.com/dnnsv8tzm/image/upload/f_auto,q_auto:eco,w_1200,c_limit/v1789084259/codeics-og_w3uke0.png" />
+    <meta property="og:image:secure_url" content="https://res.cloudinary.com/dnnsv8tzm/image/upload/f_auto,q_auto:eco,w_1200,c_limit/v1789084259/codeics-og_w3uke0.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -37,7 +37,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Codeics — 3D Web &amp; AI Engineering Studio" />
     <meta name="twitter:description" content="Immersive 3D websites, AI web apps and Core Web Vitals-optimized builds for B2B, startups and luxury brands." />
-    <meta name="twitter:image" content="https://res.cloudinary.com/dnnsv8tzm/image/upload/w_1200,h_630,c_fill,q_auto,f_auto/v1789084259/codeics-og_w3uke0.png" />
+    <meta name="twitter:image" content="https://res.cloudinary.com/dnnsv8tzm/image/upload/f_auto,q_auto:eco,w_1200,c_limit/v1789084259/codeics-og_w3uke0.png" />
 
     <!-- Structured Data for Search Engines & AI Bots (Schema.org) -->
     <script type="application/ld+json">
@@ -93,6 +93,17 @@
       }
       #root { min-height: 100dvh; }
     </style>
+
+    <!-- Eliminate Render-Blocking Stylesheets -->
+    <script>
+      (function() {
+        var links = document.querySelectorAll('link[rel="stylesheet"]');
+        for (var i = 0; i < links.length; i++) {
+          links[i].media = 'print';
+          links[i].onload = function() { this.media = 'all'; };
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
