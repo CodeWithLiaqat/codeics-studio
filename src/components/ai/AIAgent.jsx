@@ -55,18 +55,34 @@ export default function AIAgent() {
 
   const push = (role, text, extra = {}) => setMessages((m) => [...m, { id: idRef.current++, role, text, ...extra }]);
 
+  // Fix 1: Scroll layout calculation deferred and guarded by `open`
   useEffect(() => {
-    const el = listRef.current;
-    if (el) el.scrollTop = el.scrollHeight;
-  }, [messages, typing]);
+    if (!open) return;
+    const frame = requestAnimationFrame(() => {
+      const el = listRef.current;
+      if (el) el.scrollTop = el.scrollHeight;
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [messages, typing, open]);
 
+  // Fix 2: Prevent premature DOM/window thrashing on initial load
   useEffect(() => {
-    const mobile = window.matchMedia("(max-width: 639px)").matches;
-    if (mobile) document.documentElement.style.overflow = open ? "hidden" : "";
-    if (open && !mobile) setTimeout(() => inputRef.current?.focus(), 150);
+    if (!open) return;
+    const isMobile = window.innerWidth < 640;
+    if (isMobile) {
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      const timer = setTimeout(() => inputRef.current?.focus(), 150);
+      return () => clearTimeout(timer);
+    }
+
     const onKey = (e) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+
+    return () => {
+      document.documentElement.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
   }, [open]);
 
   const reply = (text, extra) => {
@@ -113,10 +129,8 @@ export default function AIAgent() {
     if (lead) return advanceLead(text);
     if (LEAD_WORDS.test(text)) return startLead();
 
-    // Send query to Gemini API Serverless Route
     setTyping(true);
     try {
-      // Build conversation history for context
       const chatPayload = messages
         .filter((m) => m.role === "user" || m.role === "bot")
         .map((m) => ({
