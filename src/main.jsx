@@ -1,7 +1,16 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
-import "./index.css";
+
+// 1. '?inline' lagane se Vite isko alag CSS file banane ke bajaye JavaScript string mein convert kar dega
+import cssText from "./index.css?inline";
+
+// 2. React load hone se pehle CSS ko instantly DOM mein inject karein taake network block na ho
+if (typeof document !== "undefined") {
+  const style = document.createElement("style");
+  style.textContent = cssText;
+  document.head.appendChild(style);
+}
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
